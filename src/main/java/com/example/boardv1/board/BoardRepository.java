@@ -35,8 +35,13 @@ public class BoardRepository {
         return list;
     }
 
-    public void save(Board board) {
-        em.persist(board);
+    public void findAllV2() {
+        em.createQuery("select b.id, b.title from Board b").getResultList();
+    }
+
+    public Board save(Board board) {
+        em.persist(board); // 영속화(영구히 저장한다)->디스크에
+        return board;
     }
 
     public void delete(Board board) {
