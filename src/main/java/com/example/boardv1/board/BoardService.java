@@ -28,5 +28,22 @@ public class BoardService {
         board.setContent(content);
         // 자동 flush
     }
+
+    // 역할 1. 원자성(모든 게 다 되면 commit, 하나라도 실패하면 rollback)
+    // 역할 2. 트랜잭션 종료시 flush 됨
+    @Transactional 
+    public void 게시글쓰기(String title, String content) {
+        // 1. 비영속 객체
+        Board board = new Board();
+        board.setTitle(title);
+        board.setContent(content);
+
+        System.out.println("before persist " + board.getId());
+
+        // 2. persist
+        boardRepository.save(board);
+
+        System.out.println("after persist " + board.getId());
+    }
     
 }

@@ -30,7 +30,7 @@ public class BoardRepository {
     }
 
     public List<Board> findAll() {
-        Query query = em.createQuery("select b from Board b", Board.class); // 객체 지향 쿼리
+        Query query = em.createQuery("select b from Board b order by b.id desc", Board.class); // 객체 지향 쿼리
         List<Board> list = query.getResultList();
         return list;
     }
