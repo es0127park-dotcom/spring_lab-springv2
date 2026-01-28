@@ -56,4 +56,10 @@ public class BoardController {
         req.setAttribute("model", board);
         return "board/detail"; // mustache 파일의 경로
     }
+
+    @PostMapping("/boards/{id}/delete")
+    public String delete(@PathVariable("id") int id){
+        boardService.게시글삭제(id);
+        return "redirect:/"; 
+    }
 }

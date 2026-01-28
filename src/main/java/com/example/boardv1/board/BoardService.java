@@ -45,5 +45,11 @@ public class BoardService {
 
         System.out.println("after persist " + board.getId());
     }
+
+    @Transactional
+    public void 게시글삭제(int id) {
+        Board board = boardRepository.findById(id); // 영속화
+        boardRepository.delete(board); // 영속화된 객체를 삭제
+    }
     
 }
