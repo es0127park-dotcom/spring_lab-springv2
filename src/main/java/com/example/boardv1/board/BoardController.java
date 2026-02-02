@@ -19,15 +19,15 @@ public class BoardController {
 
     // title : title=title7&content=content7 (x-www-form)
     @PostMapping("/boards/save")
-    public String save(BoardSaveDTO reqDTO){ // new해서 넣어줌! 필드가 많을 때 상태만 추가하면 되기 때문에 매우 편함! 재사용 가능!(필드명 잘 적어야 함)
+    public String save(BoardRequest.SaveOrUpdateDTO reqDTO){ // new해서 넣어줌! 필드가 많을 때 상태만 추가하면 되기 때문에 매우 편함! 재사용 가능!(필드명 잘 적어야 함)
         boardService.게시글쓰기(reqDTO.getTitle(), reqDTO.getContent());
         return "redirect:/"; 
     }
 
     // body : title=제목&content=내용
     @PostMapping("/boards/{id}/update")
-    public String update(@PathVariable("id") int id, @RequestParam("title") String title, @RequestParam("content") String content){
-        boardService.게시글수정(id,title,content);
+    public String update(@PathVariable("id") int id, BoardRequest.SaveOrUpdateDTO reqDTO){
+        boardService.게시글수정(id,reqDTO.getTitle(), reqDTO.getContent());
         return "redirect:/boards/"+id; 
     }
 
