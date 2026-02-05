@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.boardv1.reply.Reply;
+import com.example.boardv1.user.User;
+import com.example.boardv1.user.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 
 // 책임 : 트랜잭션 관리 + DTO 만들기 + 권한 체크(DB정보가 필요하기 때문)
@@ -13,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     public List<Board> 게시글목록() {
         return boardRepository.findAll();
@@ -79,5 +84,7 @@ public class BoardService {
 
         boardRepository.delete(board);
     } // 자동 flush
+
+
 
 }
